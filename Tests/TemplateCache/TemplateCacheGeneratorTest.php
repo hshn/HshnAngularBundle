@@ -34,8 +34,8 @@ class TemplateCacheGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testAll()
     {
-        $this->assertGeneration(__DIR__.'/Fixtures/caches/all_recursive.js', 'all', [__DIR__.'/Fixtures/templates']);
-        $this->assertGeneration(__DIR__.'/Fixtures/caches/all.js', 'all', [__DIR__.'/Fixtures/templates/bar', __DIR__.'/Fixtures/templates/foo']);
+        $this->assertGeneration(__DIR__.'/Fixtures/caches/all_recursive.js', 'all', array(__DIR__.'/Fixtures/templates'));
+        $this->assertGeneration(__DIR__.'/Fixtures/caches/all.js', 'all', array(__DIR__.'/Fixtures/templates/bar', __DIR__.'/Fixtures/templates/foo'));
     }
 
     /**
@@ -43,7 +43,7 @@ class TemplateCacheGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyBar()
     {
-        $this->assertGeneration(__DIR__.'/Fixtures/caches/bar.js', 'bar', [__DIR__.'/Fixtures/templates/bar']);
+        $this->assertGeneration(__DIR__.'/Fixtures/caches/bar.js', 'bar', array(__DIR__.'/Fixtures/templates/bar'));
     }
 
     /**
@@ -63,7 +63,7 @@ class TemplateCacheGeneratorTest extends \PHPUnit_Framework_TestCase
             ->method('getPath')
             ->will($this->returnValue(__DIR__));
 
-        $this->assertGeneration(__DIR__.'/Fixtures/caches/bar.js', 'bar', ['@Hoge/Fixtures/templates/bar']);
+        $this->assertGeneration(__DIR__.'/Fixtures/caches/bar.js', 'bar', array('@Hoge/Fixtures/templates/bar'));
     }
 
     /**

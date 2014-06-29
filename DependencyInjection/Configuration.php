@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
                                         ->beforeNormalization()
                                             ->ifString()
                                             ->then(function ($v) {
-                                                return [$v];
+                                                return array($v);
                                             })
                                         ->end()
                                         ->isRequired()
