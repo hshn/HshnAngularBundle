@@ -24,5 +24,10 @@
             "Hshn\\AngularBundle": ""
         }
     },
-    "target-dir": "Hshn/AngularBundle"
+    "target-dir": "Hshn/AngularBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
 }
