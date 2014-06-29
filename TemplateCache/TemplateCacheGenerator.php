@@ -73,12 +73,12 @@ class TemplateCacheGenerator
      */
     private function getTargetDirectories(ConfigurationInterface $configuration)
     {
+        $kernel = $this->kernel;
         $directories = array();
 
         foreach ($configuration->getTargets() as $target) {
-            $that = $this;
-            $directories[] = preg_replace_callback('/^@([^\/]+)/', function ($matches) use ($that) {
-                return $that->kernel->getBundle($matches[1])->getPath();
+            $directories[] = preg_replace_callback('/^@([^\/]+)/', function ($matches) use ($kernel) {
+                return $kernel->getBundle($matches[1])->getPath();
             }, $target);
         }
 
