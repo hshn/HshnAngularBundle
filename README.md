@@ -1,6 +1,10 @@
 HshnAngularBundle
 =================
 
+[![Build Status](https://travis-ci.org/hshn/HshnAngularBundle.svg?branch=master)](https://travis-ci.org/hshn/HshnAngularBundle)
+
+The HshnAngularBundle adds support for a some AngularJS in Symfony2
+
 License
 -------
 
