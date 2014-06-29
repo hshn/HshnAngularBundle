@@ -52,9 +52,9 @@ class TemplateCacheGenerator
             $output .= "  .run(['\$templateCache', function (\$templateCache) {\n";
             $output .= "    \$templateCache.put('{$templateId}',\n";
 
-            $html = [];
+            $html = array();
             foreach (new \SplFileObject($file->getPathname(), 'r') as $line) {
-                $html[] = '    \'' . str_replace(["\r", "\n", '\''], ['\r', '\n', '\\\''], $line) . "'";
+                $html[] = '    \'' . str_replace(array("\r", "\n", '\''), array('\r', '\n', '\\\''), $line) . "'";
             }
 
             $output .= implode(" +\n", $html) . ");\n";
@@ -73,11 +73,12 @@ class TemplateCacheGenerator
      */
     private function getTargetDirectories(ConfigurationInterface $configuration)
     {
-        $directories = [];
+        $directories = array();
 
         foreach ($configuration->getTargets() as $target) {
-            $directories[] = preg_replace_callback('/^@([^\/]+)/', function ($matches) {
-                return $this->kernel->getBundle($matches[1])->getPath();
+            $that = $this;
+            $directories[] = preg_replace_callback('/^@([^\/]+)/', function ($matches) use ($that) {
+                return $that->kernel->getBundle($matches[1])->getPath();
             }, $target);
         }
 

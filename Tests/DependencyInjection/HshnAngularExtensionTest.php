@@ -33,21 +33,21 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadDefaults()
     {
-        $this->extension->load([
-            'hshn_angular' => [
-                'template_cache' => [
-                    'templates' => [
-                        'foo' => [
-                            'targets' => ['hoge']
-                        ],
-                        'bar' => [
-                            'targets' => ['path/to/dir-a', 'path/to/dir-b'],
+        $this->extension->load(array(
+            'hshn_angular' => array(
+                'template_cache' => array(
+                    'templates' => array(
+                        'foo' => array(
+                            'targets' => array('hoge')
+                        ),
+                        'bar' => array(
+                            'targets' => array('path/to/dir-a', 'path/to/dir-b'),
                             'output'  => '/bar/bar/bar.js'
-                        ]
-                    ]
-                ]
-            ]
-        ], $this->container);
+                        )
+                    )
+                )
+            )
+        ), $this->container);
 
         $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
@@ -57,14 +57,14 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         /* @var $config Definition */
         $config = $calls[0][1][0];
-        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', ['foo']);
-        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', [['hoge']]);
-        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', ['%kernel.root_dir%/../web/js/hshn_angular/templates/foo.js']);
+        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('foo'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('hoge')));
+        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('%kernel.root_dir%/../web/js/hshn_angular/templates/foo.js'));
 
         $config = $calls[1][1][0];
-        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', ['bar']);
-        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', [['path/to/dir-a', 'path/to/dir-b']]);
-        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', ['/bar/bar/bar.js']);
+        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
+        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('/bar/bar/bar.js'));
     }
 
     /**

@@ -50,11 +50,11 @@ class HshnAngularExtension extends Extension
         foreach ($templates as $moduleName => $templateConfig) {
             $configuration = new Definition('%hshn_angular.template_cache.configuration.class%');
             $configuration
-                ->addMethodCall('setModuleName', [$moduleName])
-                ->addMethodCall('setOutput', [$templateConfig['output'] ?: $outputDir . DIRECTORY_SEPARATOR . $moduleName . '.js'])
-                ->addMethodCall('setTargets', [$templateConfig['targets']]);
+                ->addMethodCall('setModuleName', array($moduleName))
+                ->addMethodCall('setOutput', array($templateConfig['output'] ?: $outputDir . DIRECTORY_SEPARATOR . $moduleName . '.js'))
+                ->addMethodCall('setTargets', array($templateConfig['targets']));
 
-            $manager->addMethodCall('addModule', [$configuration]);
+            $manager->addMethodCall('addModule', array($configuration));
         }
     }
 }

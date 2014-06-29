@@ -17,6 +17,6 @@ class SetParameterClosureFilterPass implements CompilerPassInterface
         }
 
         $closure = $container->getDefinition('assetic.filter.closure.jar');
-        $closure->addMethodCall('setLanguage', [$container->getParameterBag()->resolveValue('%assetic.filter.closure.language%')]);
+        $closure->addMethodCall('setLanguage', array($container->getParameterBag()->resolveValue('%assetic.filter.closure.language%')));
     }
 }

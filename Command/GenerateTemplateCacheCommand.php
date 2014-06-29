@@ -5,7 +5,6 @@ namespace Hshn\AngularBundle\Command;
 use Hshn\AngularBundle\TemplateCache\TemplateCacheGenerator;
 use Hshn\AngularBundle\TemplateCache\TemplateCacheManager;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
