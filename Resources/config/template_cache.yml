@@ -1,0 +1,22 @@
+parameters:
+  hshn_angular.template_cache.generator.class:     Hshn\AngularBundle\TemplateCache\TemplateCacheGenerator
+  hshn_angular.template_cache.manager.class:       Hshn\AngularBundle\TemplateCache\TemplateCacheManager
+  hshn_angular.template_cache.configuration.class: Hshn\AngularBundle\TemplateCache\Configuration
+
+services:
+  hshn_angular.template_cache.generator:
+    class: %hshn_angular.template_cache.generator.class%
+    arguments:
+      - @filesystem
+      - @kernel
+
+  hshn_angular.template_cache.manager:
+    class: %hshn_angular.template_cache.manager.class%
+
+  hshn_angular.template_cache.generate_command:
+    class: Hshn\AngularBundle\Command\GenerateTemplateCacheCommand
+    arguments:
+      - @hshn_angular.template_cache.generator
+      - @hshn_angular.template_cache.manager
+    tags:
+      - name: console.command
