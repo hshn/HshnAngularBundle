@@ -14,10 +14,16 @@
         "symfony/finder": "~2.1",
         "doctrine/collections": "1.*"
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "autoload": {
         "psr-0": {
-	    "Hshn\\AngularBundle": ""
+            "Hshn\\AngularBundle": ""
         }
     },
-    "target-dir": "Hshn/AngularBundle"
+    "target-dir": "Hshn/AngularBundle",
+    "require-dev": {
+        "phpunit/phpunit": "~3.7"
+    }
 }
