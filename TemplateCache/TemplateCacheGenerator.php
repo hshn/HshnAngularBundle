@@ -14,17 +14,24 @@ class TemplateCacheGenerator
     private $fs;
 
     /**
+     * @var Compiler
+     */
+    private $compiler;
+
+    /**
      * @var TemplateFinder
      */
     private $finder;
 
     /**
      * @param TemplateFinder $finder
+     * @param Compiler       $compiler
      * @param Filesystem     $fs
      */
-    public function __construct(TemplateFinder $finder, Filesystem $fs)
+    public function __construct(TemplateFinder $finder, Compiler $compiler, Filesystem $fs)
     {
         $this->finder = $finder;
+        $this->compiler = $compiler;
         $this->fs = $fs;
     }
 
@@ -35,25 +42,7 @@ class TemplateCacheGenerator
     {
         $files = $this->finder->find($configuration);
 
-        $output = "'use strict';\n";
-        $output .= "var app = angular.module('{$configuration->getModuleName()}', [])\n";
-
-        /* @var $file SplFileInfo */
-        foreach ($files as $file) {
-            $templateId = $file->getRelativePathname();
-            $output .= "  .run(['\$templateCache', function (\$templateCache) {\n";
-            $output .= "    \$templateCache.put('{$templateId}',\n";
-
-            $html = array();
-            foreach (new \SplFileObject($file->getPathname(), 'r') as $line) {
-                $html[] = '    \'' . str_replace(array("\r", "\n", '\''), array('\r', '\n', '\\\''), $line) . "'";
-            }
-
-            $output .= implode(" +\n", $html) . ");\n";
-            $output .= "  })\n";
-        }
-
-        $output .= ";\n";
+        $output = $this->compiler->compile($files, $configuration->getModuleName());
 
         $this->fs->dumpFile($configuration->getOutput(), $output);
     }

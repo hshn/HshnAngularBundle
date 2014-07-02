@@ -37,7 +37,7 @@ class TemplateFinder
                 return strcmp($a->getRelativePathname(), $b->getRelativePathname());
             });
 
-        return $finder;
+        return iterator_to_array($finder->getIterator());
     }
 
     /**
