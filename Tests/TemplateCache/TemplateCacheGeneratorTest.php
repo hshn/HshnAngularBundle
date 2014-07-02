@@ -4,6 +4,7 @@ namespace Hshn\AngularBundle\Tests\TemplateCache;
 
 use Hshn\AngularBundle\TemplateCache\ConfigurationInterface;
 use Hshn\AngularBundle\TemplateCache\TemplateCacheGenerator;
+use Hshn\AngularBundle\TemplateCache\TemplateFinder;
 use Symfony\Component\Filesystem\Filesystem;
 
 class TemplateCacheGeneratorTest extends \PHPUnit_Framework_TestCase
@@ -24,8 +25,8 @@ class TemplateCacheGeneratorTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->generator = new TemplateCacheGenerator(
-            new Filesystem(),
-            $this->kernel = $this->getMock('Symfony\Component\HttpKernel\KernelInterface')
+            new TemplateFinder($this->kernel = $this->getMock('Symfony\Component\HttpKernel\KernelInterface')),
+            new Filesystem()
         );
     }
 
