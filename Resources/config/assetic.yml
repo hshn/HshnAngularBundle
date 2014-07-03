@@ -1,0 +1,11 @@
+parameters:
+  hshn_angular.asset.template_cache.class: Hshn\AngularBundle\TemplateCache\Assetic\Asset
+
+services:
+  hshn_angular.asset.template_cache:
+    abstract: true
+    class: %hshn_angular.asset.template_cache.class%
+    arguments:
+      - @hshn_angular.template_cache.template_finder
+      - @hshn_angular.template_cache.compiler
+      - ~
