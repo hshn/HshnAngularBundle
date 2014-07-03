@@ -24,6 +24,10 @@ class HshnAngularExtension extends Extension
         if (isset($config['template_cache'])) {
             $this->loadTemplateCache($container, $loader, $config['template_cache']);
         }
+
+        if (isset($config['assetic'])) {
+            $this->loadAssetic($container, $loader, $config['assetic']);
+        }
     }
 
     /**
@@ -56,5 +60,15 @@ class HshnAngularExtension extends Extension
 
             $manager->addMethodCall('addModule', array($configuration));
         }
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     * @param array            $config
+     */
+    private function loadAssetic(ContainerBuilder $container, LoaderInterface $loader, array $config)
+    {
+        $loader->load('assetic.yml');
     }
 }

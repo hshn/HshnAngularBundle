@@ -33,22 +33,11 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadDefaults()
     {
-        $this->extension->load(array(
-            'hshn_angular' => array(
-                'template_cache' => array(
-                    'templates' => array(
-                        'foo' => array(
-                            'targets' => array('hoge')
-                        ),
-                        'bar' => array(
-                            'targets' => array('path/to/dir-a', 'path/to/dir-b'),
-                            'output'  => '/bar/bar/bar.js'
-                        )
-                    )
-                )
-            )
-        ), $this->container);
+        $configs = $this->getConfiguration();
 
+        $this->extension->load($configs, $this->container);
+
+        $this->assertTrue($this->container->has('hshn_angular.asset.template_cache'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
 
@@ -65,6 +54,42 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
         $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('/bar/bar/bar.js'));
+    }
+
+    /**
+     * @test
+     */
+    public function testLoadWithoutAssetic()
+    {
+        $configs = $this->getConfiguration();
+        unset($configs['hshn_angular']['assetic']);
+
+        $this->extension->load($configs, $this->container);
+
+        $this->assertFalse($this->container->has('hshn_angular.asset.template_cache'));
+    }
+
+    /**
+     * @return array
+     */
+    private function getConfiguration()
+    {
+        return array(
+            'hshn_angular' => array(
+                'template_cache' => array(
+                    'templates' => array(
+                        'foo' => array(
+                            'targets' => array('hoge')
+                        ),
+                        'bar' => array(
+                            'targets' => array('path/to/dir-a', 'path/to/dir-b'),
+                            'output'  => '/bar/bar/bar.js'
+                        )
+                    )
+                ),
+                'assetic' => null,
+            )
+        );
     }
 
     /**
