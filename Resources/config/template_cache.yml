@@ -31,3 +31,7 @@ services:
       - @hshn_angular.template_cache.manager
     tags:
       - name: console.command
+
+  hshn_angular.template_cache.configuration:
+    class: %hshn_angular.template_cache.configuration.class%
+    abstract: true

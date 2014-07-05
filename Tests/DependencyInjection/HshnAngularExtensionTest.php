@@ -6,6 +6,7 @@ use Hshn\AngularBundle\DependencyInjection\HshnAngularExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\Reference;
 
 class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -43,14 +44,16 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $calls = $this->container->getDefinition('hshn_angular.template_cache.manager')->getMethodCalls();
         $this->assertCount(2, $calls);
+        $this->assertEquals('addModule', $calls[0][0]);
+        $this->assertEquals('addModule', $calls[1][0]);
 
-        /* @var $config Definition */
-        $config = $calls[0][1][0];
+        $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo'));
+
         $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('foo'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('hoge')));
         $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('%kernel.root_dir%/../web/js/hshn_angular/templates/foo.js'));
 
-        $config = $calls[1][1][0];
+        $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
         $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('/bar/bar/bar.js'));

@@ -5,8 +5,9 @@ namespace Hshn\AngularBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class HshnAngularExtension extends Extension
@@ -52,13 +53,14 @@ class HshnAngularExtension extends Extension
         $manager = $container->getDefinition('hshn_angular.template_cache.manager');
 
         foreach ($templates as $moduleName => $templateConfig) {
-            $configuration = new Definition('%hshn_angular.template_cache.configuration.class%');
+            $configuration = new DefinitionDecorator('hshn_angular.template_cache.configuration');
             $configuration
                 ->addMethodCall('setModuleName', array($moduleName))
                 ->addMethodCall('setOutput', array($templateConfig['output'] ?: $outputDir . DIRECTORY_SEPARATOR . $moduleName . '.js'))
                 ->addMethodCall('setTargets', array($templateConfig['targets']));
 
-            $manager->addMethodCall('addModule', array($configuration));
+            $container->setDefinition($id = sprintf('hshn_angular.template_cache.configuration.%s', $moduleName), $configuration);
+            $manager->addMethodCall('addModule', array(new Reference($id)));
         }
     }
 
