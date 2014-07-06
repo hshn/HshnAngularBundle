@@ -1,5 +1,6 @@
 parameters:
-  hshn_angular.asset.template_cache.class: Hshn\AngularBundle\TemplateCache\Assetic\Asset
+  hshn_angular.asset.template_cache.class:          Hshn\AngularBundle\Assetic\Asset\TemplateCacheAsset
+  hshn_angular.asset.template_cache.resource.class: Hshn\AngularBundle\Assetic\TemplateCacheResource
 
 services:
   hshn_angular.asset.template_cache:
@@ -9,3 +10,17 @@ services:
       - @hshn_angular.template_cache.template_finder
       - @hshn_angular.template_cache.compiler
       - ~
+
+  hshn_angular.asset.config_loader:
+    public: false
+    class: %assetic.config_loader.class%
+    tags:
+      - { name: assetic.formula_loader, alias: hshn_ng_template_cache }
+
+  hshn_angular.asset.template_cache.resource:
+    public: false
+    class: %hshn_angular.asset.template_cache.resource.class%
+    arguments:
+      - @hshn_angular.template_cache.manager
+    tags:
+      - { name: assetic.formula_resource, loader: hshn_ng_template_cache }
