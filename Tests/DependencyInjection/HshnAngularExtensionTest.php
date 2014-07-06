@@ -38,12 +38,12 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->extension->load($configs, $this->container);
 
-        $this->assertTrue($this->container->has('hshn_angular.asset.template_cache'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.template_finder'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.compiler'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.generate_command'));
+        $this->assertHasService('hshn_angular.asset.template_cache');
+        $this->assertHasService('hshn_angular.template_cache.manager');
+        $this->assertHasService('hshn_angular.template_cache.generator');
+        $this->assertHasService('hshn_angular.template_cache.template_finder');
+        $this->assertHasService('hshn_angular.template_cache.compiler');
+        $this->assertHasService('hshn_angular.template_cache.generate_command');
 
         $calls = $this->container->getDefinition('hshn_angular.template_cache.manager')->getMethodCalls();
         $this->assertCount(2, $calls);
@@ -70,6 +70,9 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         $configs = $this->getConfiguration();
 
         $this->extension->load($configs, $this->container);
+
+        $this->assertHasService('hshn_angular.asset.template_cache.resource');
+        $this->assertHasService('hshn_angular.asset.template_cache.naming');
 
         $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.foo'));
         $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/foo.js'));
@@ -134,5 +137,13 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->fail("Failed asserting that method {$name} was called");
+    }
+
+    /**
+     * @param $id
+     */
+    private function assertHasService($id)
+    {
+        $this->assertTrue($this->container->has($id) || $this->container->hasAlias($id), "service or alias {$id}");
     }
 }
