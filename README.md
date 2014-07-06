@@ -5,6 +5,11 @@ HshnAngularBundle
 
 The HshnAngularBundle adds support for a some AngularJS in Symfony2
 
+Documentation
+-------------
+
+[Read the Documentation for master](https://github.com/hshn/HshnAngularBundle/blob/master/Resources/doc/index.md)
+
 License
 -------
 
