@@ -1,7 +1,7 @@
 HshnAngularBundle
 =================
 
-[![Build Status](https://travis-ci.org/hshn/HshnAngularBundle.svg?branch=master)](https://travis-ci.org/hshn/HshnAngularBundle)
+[![Build Status](https://travis-ci.org/hshn/HshnAngularBundle.svg?branch=master)](https://travis-ci.org/hshn/HshnAngularBundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hshn/HshnAngularBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hshn/HshnAngularBundle/?branch=master)
 
 The HshnAngularBundle adds support for a some AngularJS in Symfony2
 
