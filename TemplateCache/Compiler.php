@@ -29,7 +29,7 @@ class Compiler
             }
 
             $output .= implode(" +\n", $html) . ");\n";
-            $output .= "  })\n";
+            $output .= "  }])\n";
         }
 
         $output .= ";\n";
