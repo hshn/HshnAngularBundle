@@ -80,7 +80,7 @@ class HshnAngularExtension extends Extension
             $asset->addMethodCall('setTargetPath', array(sprintf('js/ng_template_cache/%s.js', $moduleName)));
             $asset->addTag('assetic.asset', array('alias' => 'ng_template_cache_' . $moduleName));
 
-            $container->setDefinition($id = sprintf('hshn_angular.asset.template_cache.%s', $moduleName), $asset);
+            $container->setDefinition(sprintf('hshn_angular.asset.template_cache.%s', $moduleName), $asset);
         }
 
         $container->setAlias('hshn_angular.asset.template_cache.naming', $config['template_cache']['naming']);

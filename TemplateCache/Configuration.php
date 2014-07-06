@@ -2,8 +2,6 @@
 
 namespace Hshn\AngularBundle\TemplateCache;
 
-use Symfony\Component\Finder\Finder;
-
 class Configuration implements ConfigurationInterface
 {
     /**
