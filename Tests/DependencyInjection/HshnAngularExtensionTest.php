@@ -51,6 +51,9 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
+        $this->assertTrue($this->container->has('hshn_angular.template_cache.template_finder'));
+        $this->assertTrue($this->container->has('hshn_angular.template_cache.compiler'));
+        $this->assertTrue($this->container->has('hshn_angular.template_cache.generate_command'));
 
         $calls = $this->container->getDefinition('hshn_angular.template_cache.manager')->getMethodCalls();
         $this->assertCount(2, $calls);

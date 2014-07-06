@@ -4,6 +4,7 @@ parameters:
   hshn_angular.template_cache.template_finder.class:  Hshn\AngularBundle\TemplateCache\TemplateFinder
   hshn_angular.template_cache.compiler.class:         Hshn\AngularBundle\TemplateCache\Compiler
   hshn_angular.template_cache.configuration.class:    Hshn\AngularBundle\TemplateCache\Configuration
+  hshn_angular.template_cache.generate_command.class: Hshn\AngularBundle\Command\GenerateTemplateCacheCommand
 
 services:
   hshn_angular.template_cache.generator:
@@ -14,7 +15,7 @@ services:
       - @filesystem
 
   hshn_angular.template_cache.template_finder:
-    class: hshn_angular.template_cache.template_finder.class
+    class: %hshn_angular.template_cache.template_finder.class%
     arguments:
       - @kernel
 
@@ -25,7 +26,7 @@ services:
     class: %hshn_angular.template_cache.compiler.class%
 
   hshn_angular.template_cache.generate_command:
-    class: Hshn\AngularBundle\Command\GenerateTemplateCacheCommand
+    class: %hshn_angular.template_cache.generate_command.class%
     arguments:
       - @hshn_angular.template_cache.generator
       - @hshn_angular.template_cache.manager
