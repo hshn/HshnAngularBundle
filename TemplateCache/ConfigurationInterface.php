@@ -11,11 +11,13 @@ interface ConfigurationInterface
 
     /**
      * @param string $moduleName
+     * @return void
      */
     public function setModuleName($moduleName);
 
     /**
      * @param string[] $targets
+     * @return void
      */
     public function setTargets(array $targets);
 
