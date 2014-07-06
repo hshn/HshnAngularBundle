@@ -15,6 +15,7 @@
         "doctrine/collections": "1.*"
     },
     "require-dev": {
+        "symfony/assetic-bundle": "~2.1"
     },
     "config": {
         "bin-dir": "bin"

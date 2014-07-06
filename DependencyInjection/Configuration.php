@@ -41,6 +41,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('assetic')
+                ->end()
             ->end()
         ;
 

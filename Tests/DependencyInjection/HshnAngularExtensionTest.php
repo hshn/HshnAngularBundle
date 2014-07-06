@@ -6,6 +6,7 @@ use Hshn\AngularBundle\DependencyInjection\HshnAngularExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\Reference;
 
 class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +34,68 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadDefaults()
     {
-        $this->extension->load(array(
+        $configs = $this->getConfiguration();
+
+        $this->extension->load($configs, $this->container);
+
+        $this->assertTrue($this->container->has('hshn_angular.asset.template_cache'));
+        $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
+        $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
+
+        $calls = $this->container->getDefinition('hshn_angular.template_cache.manager')->getMethodCalls();
+        $this->assertCount(2, $calls);
+        $this->assertEquals('addModule', $calls[0][0]);
+        $this->assertEquals('addModule', $calls[1][0]);
+
+        $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo'));
+
+        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('foo'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('hoge')));
+        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('%kernel.root_dir%/../web/js/hshn_angular/templates/foo.js'));
+
+        $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.bar'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
+        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('/bar/bar/bar.js'));
+    }
+
+    /**
+     * @test
+     */
+    public function testAssetic()
+    {
+        $configs = $this->getConfiguration();
+
+        $this->extension->load($configs, $this->container);
+
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.foo'));
+        $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/foo.js'));
+        $this->assertEquals(array(array('alias' => 'ng_template_cache_foo')), $definition->getTag('assetic.asset'));
+
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.bar'));
+        $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/bar.js'));
+        $this->assertEquals(array(array('alias' => 'ng_template_cache_bar')), $definition->getTag('assetic.asset'));
+    }
+
+    /**
+     * @test
+     */
+    public function testLoadWithoutAssetic()
+    {
+        $configs = $this->getConfiguration();
+        unset($configs['hshn_angular']['assetic']);
+
+        $this->extension->load($configs, $this->container);
+
+        $this->assertFalse($this->container->has('hshn_angular.asset.template_cache'));
+    }
+
+    /**
+     * @return array
+     */
+    private function getConfiguration()
+    {
+        return array(
             'hshn_angular' => array(
                 'template_cache' => array(
                     'templates' => array(
@@ -45,26 +107,10 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
                             'output'  => '/bar/bar/bar.js'
                         )
                     )
-                )
+                ),
+                'assetic' => null,
             )
-        ), $this->container);
-
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
-
-        $calls = $this->container->getDefinition('hshn_angular.template_cache.manager')->getMethodCalls();
-        $this->assertCount(2, $calls);
-
-        /* @var $config Definition */
-        $config = $calls[0][1][0];
-        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('foo'));
-        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('hoge')));
-        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('%kernel.root_dir%/../web/js/hshn_angular/templates/foo.js'));
-
-        $config = $calls[1][1][0];
-        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
-        $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
-        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('/bar/bar/bar.js'));
+        );
     }
 
     /**
