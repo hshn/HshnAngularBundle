@@ -2,6 +2,7 @@
 
 namespace Hshn\AngularBundle\Assetic;
 
+use Hshn\AngularBundle\Naming\TemplateCacheNamingStrategyInterface;
 use Hshn\AngularBundle\TemplateCache\TemplateCacheManager;
 use Symfony\Bundle\AsseticBundle\Factory\Resource\ConfigurationResource;
 
@@ -18,11 +19,18 @@ class TemplateCacheResource extends ConfigurationResource
     private $templateCacheManager;
 
     /**
-     * @param TemplateCacheManager $templateCacheManager
+     * @var \Hshn\AngularBundle\Naming\TemplateCacheNamingStrategyInterface
      */
-    public function __construct(TemplateCacheManager $templateCacheManager)
+    private $templateCacheNaming;
+
+    /**
+     * @param TemplateCacheManager                 $templateCacheManager
+     * @param TemplateCacheNamingStrategyInterface $templateCacheNaming
+     */
+    public function __construct(TemplateCacheManager $templateCacheManager, TemplateCacheNamingStrategyInterface $templateCacheNaming)
     {
         $this->templateCacheManager = $templateCacheManager;
+        $this->templateCacheNaming = $templateCacheNaming;
     }
 
     /**
@@ -33,7 +41,7 @@ class TemplateCacheResource extends ConfigurationResource
         $formulae = array();
 
         foreach ($this->templateCacheManager->getModules() as $configuration) {
-            $formulae['ng_template_cache_'.$configuration->getModuleName()] = array(array('@ng_template_cache_'.$configuration->getModuleName()), array(), array());
+            $formulae[$this->templateCacheNaming->getName($configuration)] = array(array('@ng_template_cache_'.$configuration->getModuleName()), array(), array());
         }
 
         return $formulae;
