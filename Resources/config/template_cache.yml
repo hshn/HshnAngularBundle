@@ -1,18 +1,10 @@
 parameters:
-  hshn_angular.template_cache.generator.class:        Hshn\AngularBundle\TemplateCache\TemplateCacheGenerator
   hshn_angular.template_cache.manager.class:          Hshn\AngularBundle\TemplateCache\TemplateCacheManager
   hshn_angular.template_cache.template_finder.class:  Hshn\AngularBundle\TemplateCache\TemplateFinder
   hshn_angular.template_cache.compiler.class:         Hshn\AngularBundle\TemplateCache\Compiler
   hshn_angular.template_cache.configuration.class:    Hshn\AngularBundle\TemplateCache\Configuration
 
 services:
-  hshn_angular.template_cache.generator:
-    class: %hshn_angular.template_cache.generator.class%
-    arguments:
-      - @hshn_angular.template_cache.template_finder
-      - @hshn_angular.template_cache.compiler
-      - @filesystem
-
   hshn_angular.template_cache.template_finder:
     class: %hshn_angular.template_cache.template_finder.class%
     arguments:
