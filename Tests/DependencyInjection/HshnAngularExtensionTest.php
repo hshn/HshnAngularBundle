@@ -67,6 +67,9 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->extension->load($configs, $this->container);
 
+        $this->assertHasService('hshn_angular.asset.template_cache.resource');
+        $this->assertHasService('hshn_angular.asset.template_cache.naming');
+
         $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.foo'));
         $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/foo.js'));
         $this->assertEquals(array(array('alias' => 'ng_template_cache_foo')), $definition->getTag('assetic.asset'));
@@ -129,5 +132,13 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->fail("Failed asserting that method {$name} was called");
+    }
+
+    /**
+     * @param $id
+     */
+    private function assertHasService($id)
+    {
+        $this->assertTrue($this->container->has($id) || $this->container->hasAlias($id), "service or alias {$id}");
     }
 }
