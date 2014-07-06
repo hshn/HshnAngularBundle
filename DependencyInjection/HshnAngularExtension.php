@@ -42,16 +42,15 @@ class HshnAngularExtension extends Extension
     {
         $loader->load('template_cache.yml');
 
-        $this->loadModuleInformation($container, $config['output_dir'], $config['templates']);
+        $this->loadModuleInformation($container, $config['templates']);
     }
 
 
     /**
      * @param ContainerBuilder $container
-     * @param string           $outputDir
      * @param array            $templates
      */
-    private function loadModuleInformation(ContainerBuilder $container, $outputDir, array $templates)
+    private function loadModuleInformation(ContainerBuilder $container, array $templates)
     {
         $manager = $container->getDefinition('hshn_angular.template_cache.manager');
 
@@ -59,7 +58,6 @@ class HshnAngularExtension extends Extension
             $configuration = new DefinitionDecorator('hshn_angular.template_cache.configuration');
             $configuration
                 ->addMethodCall('setModuleName', array($moduleName))
-                ->addMethodCall('setOutput', array($templateConfig['output'] ?: $outputDir . DIRECTORY_SEPARATOR . $moduleName . '.js'))
                 ->addMethodCall('setTargets', array($templateConfig['targets']));
 
             $container->setDefinition($id = sprintf('hshn_angular.template_cache.configuration.%s', $moduleName), $configuration);
