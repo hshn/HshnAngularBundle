@@ -93,7 +93,7 @@ class TemplateCacheAssetTest extends \PHPUnit_Framework_TestCase
      */
     private function getSplFileInfo($lastModifiedTime = 0)
     {
-        $file = $this->getMockBuilder('Symfony\Component\Finder\SplFileInfo')->disableOriginalConstructor()->getMock();
+        $file = $this->getMockBuilder('Symfony\Component\Finder\SplFileInfo')->setConstructorArgs(array(__FILE__, '', ''))->getMock();
 
         $file
             ->expects($this->any())
