@@ -27,7 +27,9 @@ class HshnAngularExtension extends Extension
         }
 
         if (isset($config['assetic'])) {
-            $this->loadAssetic($container, $loader, $config['assetic']);
+            $moduleNames = isset($config['template_cache']) ? array_keys($config['template_cache']['templates']) : array();
+
+            $this->loadAssetic($container, $loader, $config['assetic'], $moduleNames);
         }
     }
 
@@ -42,6 +44,7 @@ class HshnAngularExtension extends Extension
 
         $this->loadModuleInformation($container, $config['output_dir'], $config['templates']);
     }
+
 
     /**
      * @param ContainerBuilder $container
@@ -69,8 +72,17 @@ class HshnAngularExtension extends Extension
      * @param LoaderInterface  $loader
      * @param array            $config
      */
-    private function loadAssetic(ContainerBuilder $container, LoaderInterface $loader, array $config)
+    private function loadAssetic(ContainerBuilder $container, LoaderInterface $loader, array $config, array $moduleNames)
     {
         $loader->load('assetic.yml');
+
+        foreach ($moduleNames as $moduleName) {
+            $asset = new DefinitionDecorator('hshn_angular.asset.template_cache');
+            $asset->replaceArgument(2, new Reference(sprintf('hshn_angular.template_cache.configuration.%s', $moduleName)));
+            $asset->addMethodCall('setTargetPath', array(sprintf('js/ng_template_cache/%s.js', $moduleName)));
+            $asset->addTag('assetic.asset', array('alias' => 'ng_template_cache_' . $moduleName));
+
+            $container->setDefinition($id = sprintf('hshn_angular.asset.template_cache.%s', $moduleName), $asset);
+        }
     }
 }

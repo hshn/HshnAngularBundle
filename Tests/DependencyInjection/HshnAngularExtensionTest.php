@@ -62,6 +62,24 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function testAssetic()
+    {
+        $configs = $this->getConfiguration();
+
+        $this->extension->load($configs, $this->container);
+
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.foo'));
+        $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/foo.js'));
+        $this->assertEquals(array(array('alias' => 'ng_template_cache_foo')), $definition->getTag('assetic.asset'));
+
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.bar'));
+        $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/bar.js'));
+        $this->assertEquals(array(array('alias' => 'ng_template_cache_bar')), $definition->getTag('assetic.asset'));
+    }
+
+    /**
+     * @test
+     */
     public function testLoadWithoutAssetic()
     {
         $configs = $this->getConfiguration();
