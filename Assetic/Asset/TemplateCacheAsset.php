@@ -94,6 +94,8 @@ class TemplateCacheAsset extends BaseAsset
             return;
         }
 
+        $this->initialized = true;
+
         $this->templates = $this->templateFinder->find($this->configuration);
     }
 }
