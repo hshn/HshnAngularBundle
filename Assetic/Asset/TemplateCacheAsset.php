@@ -13,7 +13,24 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class TemplateCacheAsset extends BaseAsset
 {
+    /**
+     * @var \Hshn\AngularBundle\TemplateCache\TemplateFinder
+     */
+    private $templateFinder;
+
+    /**
+     * @var \Hshn\AngularBundle\TemplateCache\Compiler
+     */
+    private $compiler;
+
+    /**
+     * @var \Hshn\AngularBundle\TemplateCache\ConfigurationInterface
+     */
     private $configuration;
+
+    /**
+     * @var bool
+     */
     private $initialized;
 
     /**
