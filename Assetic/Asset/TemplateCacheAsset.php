@@ -6,7 +6,6 @@ use Assetic\Asset\BaseAsset;
 use Assetic\Filter\FilterInterface;
 use Hshn\AngularBundle\TemplateCache\Compiler;
 use Hshn\AngularBundle\TemplateCache\ConfigurationInterface;
-use Hshn\AngularBundle\TemplateCache\TemplateCacheGenerator;
 use Hshn\AngularBundle\TemplateCache\TemplateFinder;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -40,7 +39,7 @@ class TemplateCacheAsset extends BaseAsset
 
     /**
      * @param TemplateFinder         $templateFinder
-     * @param TemplateCacheGenerator $templateCacheGenerator
+     * @param Compiler               $compiler
      * @param ConfigurationInterface $configuration
      */
     public function __construct(TemplateFinder $templateFinder, Compiler $compiler, ConfigurationInterface $configuration)

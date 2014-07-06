@@ -17,11 +17,6 @@ class Configuration implements ConfigurationInterface
     private $targets;
 
     /**
-     * @var string
-     */
-    private $output;
-
-    /**
      * {@inheritdoc}
      */
     public function setModuleName($moduleName)
@@ -35,22 +30,6 @@ class Configuration implements ConfigurationInterface
     public function getModuleName()
     {
         return $this->moduleName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOutput($output)
-    {
-        $this->output = $output;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOutput()
-    {
-        return $this->output;
     }
 
     /**

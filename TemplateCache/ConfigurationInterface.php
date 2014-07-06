@@ -23,14 +23,4 @@ interface ConfigurationInterface
      * @return string[]
      */
     public function getTargets();
-
-    /**
-     * @param string $output
-     */
-    public function setOutput($output);
-
-    /**
-     * @return string
-     */
-    public function getOutput();
 }

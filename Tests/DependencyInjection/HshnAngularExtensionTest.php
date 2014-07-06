@@ -40,10 +40,8 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->container->has('hshn_angular.asset.template_cache'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.manager'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.generator'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.template_finder'));
         $this->assertTrue($this->container->has('hshn_angular.template_cache.compiler'));
-        $this->assertTrue($this->container->has('hshn_angular.template_cache.generate_command'));
 
         $calls = $this->container->getDefinition('hshn_angular.template_cache.manager')->getMethodCalls();
         $this->assertCount(2, $calls);
@@ -54,12 +52,10 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('foo'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('hoge')));
-        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('%kernel.root_dir%/../web/js/hshn_angular/templates/foo.js'));
 
         $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
-        $this->assertMethodCall($config->getMethodCalls(), 'setOutput', array('/bar/bar/bar.js'));
     }
 
     /**
@@ -107,7 +103,6 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
                         ),
                         'bar' => array(
                             'targets' => array('path/to/dir-a', 'path/to/dir-b'),
-                            'output'  => '/bar/bar/bar.js'
                         )
                     )
                 ),
