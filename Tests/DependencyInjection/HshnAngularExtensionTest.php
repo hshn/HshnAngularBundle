@@ -4,9 +4,7 @@ namespace Hshn\AngularBundle\Tests\DependencyInjection;
 
 use Hshn\AngularBundle\DependencyInjection\HshnAngularExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\DependencyInjection\Reference;
 
 class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -77,6 +75,8 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.bar'));
         $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/bar.js'));
         $this->assertEquals(array(array('alias' => 'ng_template_cache_bar')), $definition->getTag('assetic.asset'));
+
+        $this->assertEquals(array('language' => 'ECMASCRIPT_STRICT'), $this->container->getParameter('hshn_angular.assetic.closure'));
     }
 
     /**
