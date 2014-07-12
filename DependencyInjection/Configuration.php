@@ -50,7 +50,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('closure')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('language')->defaultValue('ECMASCRIPT_STRICT')->end()
+                                ->scalarNode('language')->defaultValue('ECMASCRIPT5_STRICT')->end()
                             ->end()
                         ->end()
                     ->end()
