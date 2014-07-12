@@ -14,8 +14,8 @@ class Compiler
      */
     public function compile(array $files, $moduleName)
     {
-        $output = "'use strict';\n";
-        $output .= "var app = angular.module('{$moduleName}', [])\n";
+        $output = "'use strict';\n\n";
+        $output .= "angular.module('{$moduleName}')\n";
 
         /* @var $file SplFileInfo */
         foreach ($files as $file) {

@@ -1,5 +1,6 @@
 'use strict';
-var app = angular.module('bar', [])
+
+angular.module('bar')
   .run(['$templateCache', function ($templateCache) {
     $templateCache.put('c.html',
     '<div class="foo" id=\'bar\'>\n' +
