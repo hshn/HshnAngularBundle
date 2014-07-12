@@ -21,11 +21,8 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": {
-            "Hshn\\AngularBundle": ""
-        }
+        "psr-4": { "Hshn\\AngularBundle\\": "" }
     },
-    "target-dir": "Hshn/AngularBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1-dev"
