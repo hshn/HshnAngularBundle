@@ -31,8 +31,8 @@ hshn_angular:
         templates:
             app: # This will be angular module name
                 targets:
-                    # Specify a directory that angular templates contains.
-                    # It will be a base directory of this module and a template url will be relative path of this base directory.
+                    # Specify a directory that angular templates are contained.
+                    # It will be a base directory of this module and a template url will be relative path from the base directory.
                     - @YourBundle/Resources/public/js
     assetic: ~
 ```
@@ -55,7 +55,6 @@ In Javascript:
 If your directory structure is like this
 
 ```
-If your bundle directory structure like that,
 @YourBundle/Resource/public/js
 ├── bar
 │   └── a.html
@@ -63,4 +62,4 @@ If your bundle directory structure like that,
     └── b.html
 ```
 
-then you can use angular template in `app` module that named `bar/a.html` and `foo/b.html`.
+then you can use two angular templates named `bar/a.html` and `foo/b.html` in `app` module.
