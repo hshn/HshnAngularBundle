@@ -16,11 +16,11 @@ class Compiler
     {
         $output = "'use strict';\n\n";
         $output .= "angular.module('{$moduleName}')\n";
+        $output .= "  .run(['\$templateCache', function (\$templateCache) {\n";
 
         /* @var $file SplFileInfo */
         foreach ($files as $file) {
             $templateId = $file->getRelativePathname();
-            $output .= "  .run(['\$templateCache', function (\$templateCache) {\n";
             $output .= "    \$templateCache.put('{$templateId}',\n";
 
             $html = array();
@@ -29,9 +29,9 @@ class Compiler
             }
 
             $output .= implode(" +\n", $html) . ");\n";
-            $output .= "  }])\n";
         }
 
+        $output .= "  }])\n";
         $output .= ";\n";
 
         return $output;

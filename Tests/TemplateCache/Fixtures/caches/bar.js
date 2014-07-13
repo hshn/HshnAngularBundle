@@ -7,8 +7,6 @@ angular.module('bar')
     '    bar c\n' +
     '</div>\n' +
     '');
-  }])
-  .run(['$templateCache', function ($templateCache) {
     $templateCache.put('d.html',
     '<div class="foo" id=\'bar\'>\n' +
     '    bar d\n' +
