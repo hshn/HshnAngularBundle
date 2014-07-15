@@ -23,14 +23,17 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('templates')
                             ->useAttributeAsKey('module_name')
                             ->prototype('array')
+                                ->beforeNormalization()
+                                    ->ifArray()
+                                    ->then(function ($v) {
+                                        if (!array_key_exists('targets', $v)) {
+                                            $v = array('targets' => $v);
+                                        }
+                                        return $v;
+                                    })
+                                ->end()
                                 ->children()
                                     ->arrayNode('targets')
-                                        ->beforeNormalization()
-                                            ->ifString()
-                                            ->then(function ($v) {
-                                                return array($v);
-                                            })
-                                        ->end()
                                         ->isRequired()
                                         ->prototype('scalar')->end()
                                     ->end()

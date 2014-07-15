@@ -29,11 +29,11 @@ public function registerBundles()
 hshn_angular:
     template_cache:
         templates:
-            app: # This will be angular module name
-                targets:
-                    # Specify a directory that angular templates are contained.
-                    # It will be a base directory of this module and a template url will be relative path from the base directory.
-                    - @YourBundle/Resources/public/js
+            # This will be angular module name
+            app:
+                # Specify a directory that angular templates are contained.
+                # It will be a base directory of this module and a template url will be relative path from the base directory.
+                - @YourBundle/Resources/public/js
     assetic: ~
 ```
 
