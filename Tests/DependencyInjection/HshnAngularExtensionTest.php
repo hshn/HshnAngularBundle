@@ -101,9 +101,7 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
             'hshn_angular' => array(
                 'template_cache' => array(
                     'templates' => array(
-                        'foo' => array(
-                            'targets' => array('hoge')
-                        ),
+                        'foo' => array('hoge'),
                         'bar' => array(
                             'targets' => array('path/to/dir-a', 'path/to/dir-b'),
                         )
