@@ -42,9 +42,12 @@ class HshnAngularExtension extends Extension
     {
         $loader->load('template_cache.yml');
 
+        $container
+            ->getDefinition('hshn_angular.template_cache.dumper')
+            ->replaceArgument(3, $config['dump_path']);
+
         $this->loadModuleInformation($container, $config['templates']);
     }
-
 
     /**
      * @param ContainerBuilder $container
@@ -69,6 +72,7 @@ class HshnAngularExtension extends Extension
      * @param ContainerBuilder $container
      * @param LoaderInterface  $loader
      * @param array            $config
+     * @param array            $moduleNames
      */
     private function loadAssetic(ContainerBuilder $container, LoaderInterface $loader, array $config, array $moduleNames)
     {

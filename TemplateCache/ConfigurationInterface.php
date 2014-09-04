@@ -10,13 +10,13 @@ interface ConfigurationInterface
     public function getModuleName();
 
     /**
-     * @param string $moduleName
+     * @param  string $moduleName
      * @return void
      */
     public function setModuleName($moduleName);
 
     /**
-     * @param string[] $targets
+     * @param  string[] $targets
      * @return void
      */
     public function setTargets(array $targets);

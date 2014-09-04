@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('template_cache')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('dump_path')->defaultValue('%kernel.root_dir%/../web/js/hshn_angular_template_cache.js')->end()
                         ->arrayNode('templates')
                             ->useAttributeAsKey('module_name')
                             ->prototype('array')
@@ -29,6 +30,7 @@ class Configuration implements ConfigurationInterface
                                         if (!array_key_exists('targets', $v)) {
                                             $v = array('targets' => $v);
                                         }
+
                                         return $v;
                                     })
                                 ->end()

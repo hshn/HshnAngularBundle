@@ -63,3 +63,21 @@ If your directory structure is like this
 ```
 
 then you can use two angular templates named `bar/a.html` and `foo/b.html` in `app` module.
+
+```js
+angular
+    .module('bar', [
+        'app'
+    ])
+    .directive('bar', function () {
+        return {
+            templateUrl: 'bar/a.html', // loads the template via template cache
+            link: function () {}
+        }
+    })
+```
+
+In tests:
+
+If you want to load the template cache without using assetic, run command `hshn:angular:template-cache:dump` and the template cache will be generated to the file system.
+
