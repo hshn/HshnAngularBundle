@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hshn\AngularBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

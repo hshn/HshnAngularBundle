@@ -1,9 +1,7 @@
 <?php
 
-
 namespace Hshn\AngularBundle\TemplateCache;
 use Symfony\Component\Filesystem\Filesystem;
-
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>

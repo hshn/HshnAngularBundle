@@ -49,7 +49,6 @@ class HshnAngularExtension extends Extension
         $this->loadModuleInformation($container, $config['templates']);
     }
 
-
     /**
      * @param ContainerBuilder $container
      * @param array            $templates
@@ -73,6 +72,7 @@ class HshnAngularExtension extends Extension
      * @param ContainerBuilder $container
      * @param LoaderInterface  $loader
      * @param array            $config
+     * @param array            $moduleNames
      */
     private function loadAssetic(ContainerBuilder $container, LoaderInterface $loader, array $config, array $moduleNames)
     {

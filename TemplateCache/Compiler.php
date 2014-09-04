@@ -7,8 +7,8 @@ use Symfony\Component\Finder\SplFileInfo;
 class Compiler
 {
     /**
-     * @param SplFileInfo[]  $files
-     * @param string       $moduleName
+     * @param SplFileInfo[] $files
+     * @param string        $moduleName
      *
      * @return string
      */

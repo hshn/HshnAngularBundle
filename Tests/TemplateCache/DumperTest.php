@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hshn\AngularBundle\Tests\TemplateCache;
 
 use Hshn\AngularBundle\TemplateCache\Dumper;

@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                                         if (!array_key_exists('targets', $v)) {
                                             $v = array('targets' => $v);
                                         }
+
                                         return $v;
                                     })
                                 ->end()

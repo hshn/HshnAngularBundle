@@ -5,7 +5,6 @@ namespace Hshn\AngularBundle\Tests\TemplateCache;
 use Hshn\AngularBundle\TemplateCache\Compiler;
 use Hshn\AngularBundle\TemplateCache\ConfigurationInterface;
 use Hshn\AngularBundle\TemplateCache\TemplateFinder;
-use Symfony\Component\Finder\SplFileInfo;
 
 class CompilerTest extends \PHPUnit_Framework_TestCase
 {
