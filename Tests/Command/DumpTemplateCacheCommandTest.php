@@ -17,15 +17,9 @@ class DumpTemplateCacheCommandTest extends \PHPUnit_Framework_TestCase
     public function test()
     {
         $application = new Application();
-        $application->add(new DumpTemplateCacheCommand());
+        $application->add(new DumpTemplateCacheCommand($dumper = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\Dumper')->disableOriginalConstructor()->getMock()));
 
         $command = $application->find('hshn:angular:template-cache:dump');
-        $command->setContainer($container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface'));
-        $container
-            ->expects($this->once())
-            ->method('get')
-            ->with('hshn_angular.template_cache.dumper')
-            ->will($this->returnValue($dumper = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\Dumper')->disableOriginalConstructor()->getMock()));
 
         $dumper
             ->expects($this->once())

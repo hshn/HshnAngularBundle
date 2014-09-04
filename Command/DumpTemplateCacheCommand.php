@@ -2,15 +2,31 @@
 
 namespace Hshn\AngularBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Hshn\AngularBundle\TemplateCache\Dumper;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Shota Hoshino <lga0503@gmail.com>
  */
-class DumpTemplateCacheCommand extends ContainerAwareCommand
+class DumpTemplateCacheCommand extends Command
 {
+    /**
+     * @var \Hshn\AngularBundle\TemplateCache\Dumper
+     */
+    private $dumper;
+
+    /**
+     * @param Dumper $dumper
+     */
+    public function __construct(Dumper $dumper)
+    {
+        parent::__construct();
+
+        $this->dumper = $dumper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -27,10 +43,8 @@ class DumpTemplateCacheCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dumper = $this->getContainer()->get('hshn_angular.template_cache.dumper');
+        $output->writeln('<info>[file+]</info> ' . $this->dumper->getDumpPath());
 
-        $output->writeln('<info>[file+]</info> ' . $dumper->getDumpPath());
-
-        $dumper->dump();
+        $this->dumper->dump();
     }
 }
