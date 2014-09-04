@@ -44,6 +44,9 @@ class Dumper
         $this->dumpPath = $dumpPath;
     }
 
+    /**
+     *
+     */
     public function dump()
     {
         $content = '';
@@ -56,5 +59,13 @@ class Dumper
 
         $fs = new Filesystem();
         $fs->dumpFile($this->dumpPath, $content);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDumpPath()
+    {
+        return $this->dumpPath;
     }
 }

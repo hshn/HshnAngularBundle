@@ -50,7 +50,7 @@ class DumperTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test()
+    public function testDump()
     {
         $this
             ->manager
@@ -85,6 +85,14 @@ class DumperTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFileExists($this->dumpPath);
         $this->assertEquals('foo_template_cachebar_template_cache', file_get_contents($this->dumpPath));
+    }
+
+    /**
+     * @test
+     */
+    public function testGetDumpPath()
+    {
+        $this->assertEquals($this->dumpPath, $this->dumper->getDumpPath());
     }
 
     /**
