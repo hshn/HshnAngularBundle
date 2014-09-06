@@ -14,7 +14,8 @@ class ServiceContainerTest extends WebTestCase
      */
     public function testServicesHaveRegistered()
     {
-        static::bootKernel();
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
 
         $container = static::$kernel->getContainer();
 

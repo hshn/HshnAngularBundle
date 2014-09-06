@@ -31,8 +31,7 @@ services:
       - ~
 
   hshn_angular.command.dump_template_cache:
-    public: false
-    class: hshn_angular.command.dump_template_cache.class
+    class: %hshn_angular.command.dump_template_cache.class%
     arguments:
       - @hshn_angular.template_cache.dumper
     tags:
