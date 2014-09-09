@@ -5,6 +5,7 @@ namespace Hshn\AngularBundle\Command;
 use Hshn\AngularBundle\TemplateCache\Dumper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -18,13 +19,20 @@ class DumpTemplateCacheCommand extends Command
     private $dumper;
 
     /**
-     * @param Dumper $dumper
+     * @var string
      */
-    public function __construct(Dumper $dumper)
+    private $target;
+
+    /**
+     * @param Dumper $dumper
+     * @param string $target
+     */
+    public function __construct(Dumper $dumper, $target)
     {
         parent::__construct();
 
         $this->dumper = $dumper;
+        $this->target = $target;
     }
 
     /**
@@ -35,6 +43,7 @@ class DumpTemplateCacheCommand extends Command
         $this
             ->setName('hshn:angular:template-cache:dump')
             ->setDescription('Dumps template cache to the filesystem')
+            ->addOption('target', null, InputOption::VALUE_OPTIONAL, 'Override the target path to dump')
         ;
     }
 
@@ -43,8 +52,10 @@ class DumpTemplateCacheCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('<info>[file+]</info> ' . $this->dumper->getDumpPath());
+        $target = $input->getOption('target') ?: $this->target;
 
-        $this->dumper->dump();
+        $output->writeln('<info>[file+]</info> ' . $target);
+
+        $this->dumper->dump($target);
     }
 }
