@@ -28,11 +28,11 @@ services:
       - @hshn_angular.template_cache.manager
       - @hshn_angular.template_cache.template_finder
       - @hshn_angular.template_cache.compiler
-      - ~
 
   hshn_angular.command.dump_template_cache:
     class: %hshn_angular.command.dump_template_cache.class%
     arguments:
       - @hshn_angular.template_cache.dumper
+      - ~
     tags:
       - { name: console.command }

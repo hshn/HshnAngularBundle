@@ -24,28 +24,21 @@ class Dumper
     private $compiler;
 
     /**
-     * @var string
-     */
-    private $dumpPath;
-
-    /**
      * @param TemplateCacheManager $manager
      * @param TemplateFinder       $finder
      * @param Compiler             $compiler
-     * @param string               $dumpPath
      */
-    public function __construct(TemplateCacheManager $manager, TemplateFinder $finder, Compiler $compiler, $dumpPath)
+    public function __construct(TemplateCacheManager $manager, TemplateFinder $finder, Compiler $compiler)
     {
         $this->manager = $manager;
         $this->finder = $finder;
         $this->compiler = $compiler;
-        $this->dumpPath = $dumpPath;
     }
 
     /**
-     *
+     * @param string $target
      */
-    public function dump()
+    public function dump($target)
     {
         $content = '';
 
@@ -56,14 +49,6 @@ class Dumper
         }
 
         $fs = new Filesystem();
-        $fs->dumpFile($this->dumpPath, $content);
-    }
-
-    /**
-     * @return string
-     */
-    public function getDumpPath()
-    {
-        return $this->dumpPath;
+        $fs->dumpFile($target, $content);
     }
 }
