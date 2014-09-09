@@ -3,7 +3,7 @@ HshnAngularBundle
 
 [![Build Status](https://travis-ci.org/hshn/HshnAngularBundle.svg?branch=master)](https://travis-ci.org/hshn/HshnAngularBundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hshn/HshnAngularBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hshn/HshnAngularBundle/?branch=master) [![Latest Stable Version](https://poser.pugx.org/hshn/angular-bundle/v/stable.svg)](https://packagist.org/packages/hshn/angular-bundle) [![Total Downloads](https://poser.pugx.org/hshn/angular-bundle/downloads.svg)](https://packagist.org/packages/hshn/angular-bundle) [![Latest Unstable Version](https://poser.pugx.org/hshn/angular-bundle/v/unstable.svg)](https://packagist.org/packages/hshn/angular-bundle)
 
-The HshnAngularBundle adds support for a some AngularJS in Symfony2
+The HshnAngularBundle provides "template cache" auto generation that can be loaded via assetic. It can reduce http requests. (please see [$templateCache](https://docs.angularjs.org/api/ng/service/$templateCache)).
 
 Documentation
 -------------
