@@ -41,8 +41,7 @@ class DumperTest extends \PHPUnit_Framework_TestCase
         $this->dumper = new Dumper(
             $this->manager = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\TemplateCacheManager')->disableOriginalConstructor()->getMock(),
             $this->finder = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\TemplateFinder')->disableOriginalConstructor()->getMock(),
-            $this->compiler = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\Compiler')->disableOriginalConstructor()->getMock(),
-            $this->dumpPath
+            $this->compiler = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\Compiler')->disableOriginalConstructor()->getMock()
         );
     }
 
@@ -80,18 +79,10 @@ class DumperTest extends \PHPUnit_Framework_TestCase
                 'bar_template_cache'
             ));
 
-        $this->dumper->dump();
+        $this->dumper->dump($this->dumpPath);
 
         $this->assertFileExists($this->dumpPath);
         $this->assertEquals('foo_template_cachebar_template_cache', file_get_contents($this->dumpPath));
-    }
-
-    /**
-     * @test
-     */
-    public function testGetDumpPath()
-    {
-        $this->assertEquals($this->dumpPath, $this->dumper->getDumpPath());
     }
 
     /**
