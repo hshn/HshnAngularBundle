@@ -55,8 +55,8 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
 
-        $definition = $this->container->getDefinition('hshn_angular.template_cache.dumper');
-        $this->assertEquals('%kernel.root_dir%/../web/js/hshn_angular_template_cache.js', $definition->getArgument(3));
+        $definition = $this->container->getDefinition('hshn_angular.command.dump_template_cache');
+        $this->assertEquals('%kernel.root_dir%/../web/js/hshn_angular_template_cache.js', $definition->getArgument(1));
     }
 
     /**

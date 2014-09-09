@@ -43,8 +43,8 @@ class HshnAngularExtension extends Extension
         $loader->load('template_cache.yml');
 
         $container
-            ->getDefinition('hshn_angular.template_cache.dumper')
-            ->replaceArgument(3, $config['dump_path']);
+            ->getDefinition('hshn_angular.command.dump_template_cache')
+            ->replaceArgument(1, $config['dump_path']);
 
         $this->loadModuleInformation($container, $config['templates']);
     }
