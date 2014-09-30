@@ -9,13 +9,14 @@ class Compiler
     /**
      * @param SplFileInfo[] $files
      * @param string        $moduleName
+     * @param bool          $newModule
      *
      * @return string
      */
-    public function compile(array $files, $moduleName)
+    public function compile(array $files, $moduleName, $newModule = false)
     {
         $output = "'use strict';\n\n";
-        $output .= "angular.module('{$moduleName}')\n";
+        $output .= $newModule ? "angular.module('{$moduleName}', [])\n" : "angular.module('{$moduleName}')\n";
         $output .= "  .run(['\$templateCache', function (\$templateCache) {\n";
 
         /* @var $file SplFileInfo */
