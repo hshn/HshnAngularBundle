@@ -31,9 +31,13 @@ hshn_angular:
         templates:
             # This will be angular module name
             app:
+                # When specify true, "app" module will be created.
+                new: true
+
                 # Specify a directory that angular templates are contained.
                 # It will be a base directory of this module and a template url will be relative path from the base directory.
-                - @YourBundle/Resources/public/js
+                targets:
+                    - @YourBundle/Resources/public/js
     assetic: ~
 ```
 
