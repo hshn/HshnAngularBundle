@@ -61,7 +61,8 @@ class HshnAngularExtension extends Extension
             $configuration = new DefinitionDecorator('hshn_angular.template_cache.configuration');
             $configuration
                 ->addMethodCall('setModuleName', array($moduleName))
-                ->addMethodCall('setTargets', array($templateConfig['targets']));
+                ->addMethodCall('setTargets', array($templateConfig['targets']))
+                ->addMethodCall('setNewModule', array($templateConfig['new']));
 
             $container->setDefinition($id = sprintf('hshn_angular.template_cache.configuration.%s', $moduleName), $configuration);
             $manager->addMethodCall('addModule', array(new Reference($id)));

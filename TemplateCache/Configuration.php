@@ -10,6 +10,11 @@ class Configuration implements ConfigurationInterface
     private $moduleName;
 
     /**
+     * @var bool
+     */
+    private $newModule;
+
+    /**
      * @var string[]
      */
     private $targets;
@@ -44,5 +49,21 @@ class Configuration implements ConfigurationInterface
     public function getTargets()
     {
         return $this->targets;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getNewModule()
+    {
+        return $this->newModule;
+    }
+
+    /**
+     * @param boolean $createsModule
+     */
+    public function setNewModule($createsModule)
+    {
+        $this->newModule = $createsModule;
     }
 }
