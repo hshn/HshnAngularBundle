@@ -28,11 +28,11 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider provideCompileArgs
      */
-    public function testCompile(ConfigurationInterface $configuration, $expectedFileName)
+    public function testCompile(ConfigurationInterface $configuration, $expectedFileName, $newModule)
     {
         $files = $this->finder->find($configuration);
 
-        $this->assertStringEqualsFile(__DIR__.'/Fixtures/caches/'.$expectedFileName, $this->compiler->compile($files, $configuration->getModuleName()));
+        $this->assertStringEqualsFile(__DIR__.'/Fixtures/caches/'.$expectedFileName, $this->compiler->compile($files, $configuration->getModuleName(), $newModule));
     }
 
     /**
@@ -41,9 +41,12 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
     public function provideCompileArgs()
     {
         return array(
-            array($this->getConfiguration('all', array('bar', 'foo')), 'all.js'),
-            array($this->getConfiguration('all', array('')), 'all_recursive.js'),
-            array($this->getConfiguration('bar', array('bar')), 'bar.js'),
+            array($this->getConfiguration('all', array('bar', 'foo')), 'all.js', false),
+            array($this->getConfiguration('all', array('')), 'all_recursive.js', false),
+            array($this->getConfiguration('bar', array('bar')), 'bar.js', false),
+            array($this->getConfiguration('all', array('bar', 'foo')), 'all_new.js', true),
+            array($this->getConfiguration('all', array('')), 'all_recursive_new.js', true),
+            array($this->getConfiguration('bar', array('bar')), 'bar_new.js', true),
         );
     }
 

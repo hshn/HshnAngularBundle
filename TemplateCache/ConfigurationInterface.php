@@ -25,4 +25,16 @@ interface ConfigurationInterface
      * @return string[]
      */
     public function getTargets();
+
+    /**
+     * @param boolean $newModule
+     *
+     * @return void
+     */
+    public function setNewModule($newModule);
+
+    /**
+     * @return boolean
+     */
+    public function getNewModule();
 }

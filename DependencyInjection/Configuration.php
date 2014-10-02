@@ -35,6 +35,7 @@ class Configuration implements ConfigurationInterface
                                     })
                                 ->end()
                                 ->children()
+                                    ->booleanNode('new')->cannotBeEmpty()->defaultFalse()->info('Generate template caches into the new module. If not, generate into existed one.')->end()
                                     ->arrayNode('targets')
                                         ->isRequired()
                                         ->prototype('scalar')->end()
