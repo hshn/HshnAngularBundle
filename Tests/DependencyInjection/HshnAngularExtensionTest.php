@@ -64,6 +64,30 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function testTemplateCacheModuleName()
+    {
+        $this->extension->load(array(
+            'hshn_angular' => array(
+                'template_cache' => array(
+                    'templates' => array(
+                        'foo' => array(),
+                        'foo-app' => array(),
+                        'foo.app' => array(),
+                        'foo@app' => array(),
+                    )
+                )
+            )
+        ), $this->container);
+
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo'));
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo-app'));
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo.app'));
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo@app'));
+    }
+
+    /**
+     * @test
+     */
     public function testAssetic()
     {
         $configs = $this->getConfiguration();
