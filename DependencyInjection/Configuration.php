@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('dump_path')->defaultValue('%kernel.root_dir%/../web/js/hshn_angular_template_cache.js')->end()
                         ->arrayNode('templates')
                             ->useAttributeAsKey('module_name')
+                            ->normalizeKeys(false)
                             ->prototype('array')
                                 ->beforeNormalization()
                                     ->ifArray()
