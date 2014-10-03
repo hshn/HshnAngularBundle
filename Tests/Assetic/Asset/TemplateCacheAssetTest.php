@@ -59,8 +59,11 @@ class TemplateCacheAssetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @dataProvider provideDoLoadTests
+     *
+     * @param boolean $newModule
      */
-    public function testDoLoad()
+    public function testDoLoad($newModule)
     {
         $this
             ->finder
@@ -79,14 +82,32 @@ class TemplateCacheAssetTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($moduleName = 'testModuleName'));
 
         $this
+            ->configuration
+            ->expects($this->once())
+            ->method('getNewModule')
+            ->will($this->returnValue($newModule));
+
+        $this
             ->compiler
             ->expects($this->once())
             ->method('compile')
-            ->with($templates, $moduleName)
+            ->with($templates, $moduleName, $newModule)
             ->will($this->returnValue($content = 'test content'));
 
         $this->assertEquals($content, $this->asset->dump());
     }
+
+    /**
+     * @return array
+     */
+    public function provideDoLoadTests()
+    {
+        return array(
+            array(true),
+            array(false),
+        );
+    }
+
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
