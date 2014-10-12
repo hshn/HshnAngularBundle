@@ -26,28 +26,23 @@ class TemplateCacheManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertCount(0, $this->manager->getModules());
 
-        $this->manager->addModule($foo = $this->getConfiguration('foo'));
+        $this->manager->addModule('foo', $foo = $this->getConfiguration());
         $this->assertCount(1, $this->manager->getModules());
 
-        $this->manager->addModule($bar = $this->getConfiguration('bar'));
+        $this->manager->addModule('bar', $bar = $this->getConfiguration());
         $this->assertCount(2, $this->manager->getModules());
 
-        $this->assertSame($foo, $this->manager->getModules()->get('foo'));
-        $this->assertSame($bar, $this->manager->getModules()->get('bar'));
+        $modules = $this->manager->getModules();
+        $this->assertSame($foo, $modules['foo']);
+        $this->assertSame($bar, $modules['bar']);
     }
 
     /**
-     * @param string $moduleName
-     *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    private function getConfiguration($moduleName)
+    private function getConfiguration()
     {
         $configuration = $this->getMock('Hshn\AngularBundle\TemplateCache\ConfigurationInterface');
-        $configuration
-            ->expects($this->atLeastOnce())
-            ->method('getModuleName')
-            ->will($this->returnValue($moduleName));
 
         return $configuration;
     }

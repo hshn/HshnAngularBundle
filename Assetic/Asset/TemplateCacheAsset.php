@@ -58,7 +58,7 @@ class TemplateCacheAsset extends BaseAsset
     {
         $this->initialize();
 
-        $output = $this->compiler->compile($this->templates, $this->configuration->getModuleName(), $this->configuration->getNewModule());
+        $output = $this->compiler->compile($this->templates, $this->configuration->getName(), $this->configuration->getCreate());
 
         $this->doLoad($output, $additionalFilter);
     }

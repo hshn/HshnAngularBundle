@@ -10,9 +10,10 @@ use Hshn\AngularBundle\TemplateCache\ConfigurationInterface;
 interface TemplateCacheNamingStrategyInterface
 {
     /**
+     * @param string                 $name
      * @param ConfigurationInterface $configuration
      *
      * @return string
      */
-    public function getName(ConfigurationInterface $configuration);
+    public function getName($name, ConfigurationInterface $configuration);
 }

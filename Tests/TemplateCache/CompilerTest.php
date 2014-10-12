@@ -32,7 +32,7 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
     {
         $files = $this->finder->find($configuration);
 
-        $this->assertStringEqualsFile(__DIR__.'/Fixtures/caches/'.$expectedFileName, $this->compiler->compile($files, $configuration->getModuleName(), $newModule));
+        $this->assertStringEqualsFile(__DIR__.'/Fixtures/caches/'.$expectedFileName, $this->compiler->compile($files, $configuration->getName(), $newModule));
     }
 
     /**
@@ -71,7 +71,7 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
 
         $configuration
             ->expects($this->atLeastOnce())
-            ->method('getModuleName')
+            ->method('getName')
             ->will($this->returnValue($name));
 
         return $configuration;

@@ -12,8 +12,8 @@ class TemplateCacheNamingStrategy implements TemplateCacheNamingStrategyInterfac
     /**
      * {@inheritdoc}
      */
-    public function getName(ConfigurationInterface $configuration)
+    public function getName($name, ConfigurationInterface $configuration)
     {
-        return sprintf('ng_template_cache_%s', $configuration->getModuleName());
+        return sprintf('ng_template_cache_%s', $name);
     }
 }
