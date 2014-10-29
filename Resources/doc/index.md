@@ -28,11 +28,11 @@ public function registerBundles()
 # app/config/config.yml
 hshn_angular:
     template_cache:
-        templates:
-            # This will be angular module name
+        modules:
+            # "app" will be angular module name
             app:
                 # When specify true, "app" module will be created.
-                new: true
+                create: true
 
                 # Specify a directory that angular templates are contained.
                 # It will be a base directory of this module and a template url will be relative path from the base directory.
