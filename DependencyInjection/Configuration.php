@@ -21,23 +21,19 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('dump_path')->defaultValue('%kernel.root_dir%/../web/js/hshn_angular_template_cache.js')->end()
-                        ->arrayNode('templates')
-                            ->useAttributeAsKey('module_name')
-                            ->normalizeKeys(false)
+                        ->arrayNode('modules')
+                            ->useAttributeAsKey('key')
                             ->prototype('array')
-                                ->beforeNormalization()
-                                    ->ifArray()
-                                    ->then(function ($v) {
-                                        if (!array_key_exists('targets', $v)) {
-                                            $v = array('targets' => $v);
-                                        }
-
-                                        return $v;
-                                    })
-                                ->end()
                                 ->children()
-                                    ->booleanNode('new')->cannotBeEmpty()->defaultFalse()->info('Generate template caches into the new module. If not, generate into existed one.')->end()
+                                    ->booleanNode('create')->cannotBeEmpty()->defaultFalse()->info('Generate template caches into the new module. If not, generate into existed one.')->end()
+                                    ->scalarNode('name')->defaultNull()->end()
                                     ->arrayNode('targets')
+                                        ->beforeNormalization()
+                                            ->ifString()
+                                            ->then(function ($v) {
+                                                return array($v);
+                                            })
+                                        ->end()
                                         ->isRequired()
                                         ->prototype('scalar')->end()
                                     ->end()

@@ -40,8 +40,8 @@ class TemplateCacheResource extends ConfigurationResource
     {
         $formulae = array();
 
-        foreach ($this->templateCacheManager->getModules() as $configuration) {
-            $formulae[$this->templateCacheNaming->getName($configuration)] = array(array('@ng_template_cache_'.$configuration->getModuleName()), array(), array());
+        foreach ($this->templateCacheManager->getModules() as $name => $configuration) {
+            $formulae[$this->templateCacheNaming->getName($name, $configuration)] = array(array('@ng_template_cache_'.$name), array(), array());
         }
 
         return $formulae;

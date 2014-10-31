@@ -42,9 +42,9 @@ class Dumper
     {
         $content = '';
 
-        foreach ($this->manager->getModules() as $config) {
+        foreach ($this->manager->getModules() as $name => $config) {
             if ($templates = $this->finder->find($config)) {
-                $content .= $this->compiler->compile($templates, $config->getModuleName());
+                $content .= $this->compiler->compile($templates, $config->getName(), $config->getCreate());
             }
         }
 

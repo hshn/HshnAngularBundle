@@ -48,14 +48,14 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo'));
 
-        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('foo'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setName', array('foo'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('hoge')));
-        $this->assertMethodCall($config->getMethodCalls(), 'setNewModule', array(false));
+        $this->assertMethodCall($config->getMethodCalls(), 'setCreate', array(false));
 
         $this->assertNotNull($config = $this->container->getDefinition('hshn_angular.template_cache.configuration.bar'));
-        $this->assertMethodCall($config->getMethodCalls(), 'setModuleName', array('bar'));
+        $this->assertMethodCall($config->getMethodCalls(), 'setName', array('bar'));
         $this->assertMethodCall($config->getMethodCalls(), 'setTargets', array(array('path/to/dir-a', 'path/to/dir-b')));
-        $this->assertMethodCall($config->getMethodCalls(), 'setNewModule', array(true));
+        $this->assertMethodCall($config->getMethodCalls(), 'setCreate', array(true));
 
         $definition = $this->container->getDefinition('hshn_angular.command.dump_template_cache');
         $this->assertEquals('%kernel.root_dir%/../web/js/hshn_angular_template_cache.js', $definition->getArgument(1));
@@ -69,20 +69,24 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         $this->extension->load(array(
             'hshn_angular' => array(
                 'template_cache' => array(
-                    'templates' => array(
-                        'foo' => array(),
-                        'foo-app' => array(),
-                        'foo.app' => array(),
-                        'foo@app' => array(),
+                    'modules' => array(
+                        'foo' => array(
+                            'targets' => 'foo'
+                        ),
+                        'foo-template' => array(
+                            'name' => 'foo-template',
+                            'targets' => 'foo_template'
+                        ),
                     )
                 )
             )
         ), $this->container);
 
         $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo'));
-        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo-app'));
-        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo.app'));
-        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo@app'));
+        $this->assertMethodCall($definition->getMethodCalls(), 'setName', array('foo'));
+
+        $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.template_cache.configuration.foo_template'));
+        $this->assertMethodCall($definition->getMethodCalls(), 'setName', array('foo-template'));
     }
 
     /**
@@ -91,7 +95,6 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
     public function testAssetic()
     {
         $configs = $this->getConfiguration();
-
         $this->extension->load($configs, $this->container);
 
         $this->assertHasService('hshn_angular.asset.template_cache.resource');
@@ -129,10 +132,12 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         return array(
             'hshn_angular' => array(
                 'template_cache' => array(
-                    'templates' => array(
-                        'foo' => array('hoge'),
+                    'modules' => array(
+                        'foo' => array(
+                            'targets' => 'hoge'
+                        ),
                         'bar' => array(
-                            'new' => true,
+                            'create' => true,
                             'targets' => array('path/to/dir-a', 'path/to/dir-b'),
                         )
                     )

@@ -22,11 +22,7 @@ class TemplateCacheNamingStrategyTest extends \PHPUnit_Framework_TestCase
     public function testGetName()
     {
         $config = $this->getMock('Hshn\AngularBundle\TemplateCache\ConfigurationInterface');
-        $config
-            ->expects($this->once())
-            ->method('getModuleName')
-            ->will($this->returnValue('foo'));
 
-        $this->assertEquals('ng_template_cache_foo', $this->naming->getName($config));
+        $this->assertEquals('ng_template_cache_foo', $this->naming->getName('foo', $config));
     }
 }

@@ -27,14 +27,14 @@ class TemplateCacheAssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ConfigurationInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $configuration;
+    private $module;
 
     protected function setUp()
     {
         $this->asset = new TemplateCacheAsset(
             $this->finder = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\TemplateFinder')->disableOriginalConstructor()->getMock(),
             $this->compiler = $this->getMockBuilder('Hshn\AngularBundle\TemplateCache\Compiler')->disableOriginalConstructor()->getMock(),
-            $this->configuration = $this->getMock('Hshn\AngularBundle\TemplateCache\ConfigurationInterface')
+            $this->module = $this->getMock('Hshn\AngularBundle\TemplateCache\ConfigurationInterface')
         );
     }
 
@@ -47,7 +47,7 @@ class TemplateCacheAssetTest extends \PHPUnit_Framework_TestCase
             ->finder
             ->expects($this->once())
             ->method('find')
-            ->with($this->configuration)
+            ->with($this->module)
             ->will($this->returnValue(array(
                 $this->getSplFileInfo(30),
                 $this->getSplFileInfo(80)
@@ -69,22 +69,22 @@ class TemplateCacheAssetTest extends \PHPUnit_Framework_TestCase
             ->finder
             ->expects($this->once())
             ->method('find')
-            ->with($this->configuration)
+            ->with($this->module)
             ->will($this->returnValue($templates = array(
                 $this->getSplFileInfo(),
                 $this->getSplFileInfo()
             )));
 
         $this
-            ->configuration
+            ->module
             ->expects($this->once())
-            ->method('getModuleName')
+            ->method('getName')
             ->will($this->returnValue($moduleName = 'testModuleName'));
 
         $this
-            ->configuration
+            ->module
             ->expects($this->once())
-            ->method('getNewModule')
+            ->method('getCreate')
             ->will($this->returnValue($newModule));
 
         $this

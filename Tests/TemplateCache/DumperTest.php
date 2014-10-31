@@ -54,16 +54,16 @@ class DumperTest extends \PHPUnit_Framework_TestCase
             ->manager
             ->expects($this->once())
             ->method('getModules')
-            ->will($this->returnValue($configurations = array(
-                $this->getConfiguration('foo'),
-                $this->getConfiguration('bar')
+            ->will($this->returnValue($modules = array(
+                'foo' => $this->getModule('foo'),
+                'bar' => $this->getModule('bar')
             )));
 
         $this
             ->finder
             ->expects($this->exactly(2))
             ->method('find')
-            ->with($this->logicalOr($this->identicalTo($configurations[0]), $this->identicalTo($configurations[1])))
+            ->with($this->logicalOr($this->identicalTo($modules['foo']), $this->identicalTo($modules['bar'])))
             ->will($this->onConsecutiveCalls(
                 $templates1 = array('/path/foo/1', '/path/foo/2'),
                 $templates2 = array('/path/bar')
@@ -86,17 +86,17 @@ class DumperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $moduleName
+     * @param $name
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    private function getConfiguration($moduleName)
+    private function getModule($name)
     {
         $config = $this->getMock('Hshn\AngularBundle\TemplateCache\ConfigurationInterface');
         $config
             ->expects($this->atLeastOnce())
-            ->method('getModuleName')
-            ->will($this->returnValue($moduleName));
+            ->method('getName')
+            ->will($this->returnValue($name));
 
         return $config;
     }

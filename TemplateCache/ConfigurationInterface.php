@@ -7,13 +7,14 @@ interface ConfigurationInterface
     /**
      * @return string
      */
-    public function getModuleName();
+    public function getName();
 
     /**
-     * @param  string $moduleName
+     * @param  string $name
+     *
      * @return void
      */
-    public function setModuleName($moduleName);
+    public function setName($name);
 
     /**
      * @param  string[] $targets
@@ -31,10 +32,10 @@ interface ConfigurationInterface
      *
      * @return void
      */
-    public function setNewModule($newModule);
+    public function setCreate($newModule);
 
     /**
      * @return boolean
      */
-    public function getNewModule();
+    public function getCreate();
 }

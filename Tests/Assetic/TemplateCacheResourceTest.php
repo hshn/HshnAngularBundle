@@ -37,9 +37,9 @@ class TemplateCacheResourceTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getModules')
             ->will($this->returnValue(array(
-                $this->getModule('foo'),
-                $this->getModule('bar'),
-                $this->getModule('hoge')
+                'foo' => $this->getModule(),
+                'bar' => $this->getModule(),
+                'hoge' => $this->getModule()
             )));
 
         $formulae = $this->resource->getContent();
@@ -55,18 +55,11 @@ class TemplateCacheResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $name
-     *
      * @return ConfigurationInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function getModule($name)
+    private function getModule()
     {
         $module = $this->getMock('Hshn\AngularBundle\TemplateCache\ConfigurationInterface');
-
-        $module
-            ->expects($this->atLeastOnce())
-            ->method('getModuleName')
-            ->will($this->returnValue($name));
 
         return $module;
     }

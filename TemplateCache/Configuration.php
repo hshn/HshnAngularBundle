@@ -7,12 +7,12 @@ class Configuration implements ConfigurationInterface
     /**
      * @var string
      */
-    private $moduleName;
+    private $name;
 
     /**
      * @var bool
      */
-    private $newModule;
+    private $create;
 
     /**
      * @var string[]
@@ -22,17 +22,17 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function setModuleName($moduleName)
+    public function setName($name)
     {
-        $this->moduleName = $moduleName;
+        $this->name = $name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getModuleName()
+    public function getName()
     {
-        return $this->moduleName;
+        return $this->name ?: $this->name;
     }
 
     /**
@@ -54,16 +54,16 @@ class Configuration implements ConfigurationInterface
     /**
      * @return boolean
      */
-    public function getNewModule()
+    public function getCreate()
     {
-        return $this->newModule;
+        return $this->create;
     }
 
     /**
-     * @param boolean $createsModule
+     * @param boolean $create
      */
-    public function setNewModule($createsModule)
+    public function setCreate($create)
     {
-        $this->newModule = $createsModule;
+        $this->create = $create;
     }
 }

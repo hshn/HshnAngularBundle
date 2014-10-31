@@ -2,12 +2,10 @@
 
 namespace Hshn\AngularBundle\TemplateCache;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class TemplateCacheManager
 {
     /**
-     * @var ArrayCollection|ConfigurationInterface[]
+     * @var ConfigurationInterface[]
      */
     private $modules;
 
@@ -16,19 +14,20 @@ class TemplateCacheManager
      */
     public function __construct()
     {
-        $this->modules = new ArrayCollection();
+        $this->modules = array();
     }
 
     /**
+     * @param string                 $name
      * @param ConfigurationInterface $configuration
      */
-    public function addModule(ConfigurationInterface $configuration)
+    public function addModule($name, ConfigurationInterface $configuration)
     {
-        $this->modules->set($configuration->getModuleName(), $configuration);
+        $this->modules[$name] = $configuration;
     }
 
     /**
-     * @return ArrayCollection|ConfigurationInterface[]
+     * @return ConfigurationInterface[]
      */
     public function getModules()
     {

@@ -27,7 +27,7 @@ class HshnAngularExtension extends Extension
         }
 
         if (isset($config['assetic'])) {
-            $moduleNames = isset($config['template_cache']) ? array_keys($config['template_cache']['templates']) : array();
+            $moduleNames = isset($config['template_cache']) ? array_keys($config['template_cache']['modules']) : array();
 
             $this->loadAssetic($container, $loader, $config['assetic'], $moduleNames);
         }
@@ -46,26 +46,26 @@ class HshnAngularExtension extends Extension
             ->getDefinition('hshn_angular.command.dump_template_cache')
             ->replaceArgument(1, $config['dump_path']);
 
-        $this->loadModuleInformation($container, $config['templates']);
+        $this->loadModuleInformation($container, $config['modules']);
     }
 
     /**
      * @param ContainerBuilder $container
-     * @param array            $templates
+     * @param array            $modules
      */
-    private function loadModuleInformation(ContainerBuilder $container, array $templates)
+    private function loadModuleInformation(ContainerBuilder $container, array $modules)
     {
         $manager = $container->getDefinition('hshn_angular.template_cache.manager');
 
-        foreach ($templates as $moduleName => $templateConfig) {
+        foreach ($modules as $name => $module) {
             $configuration = new DefinitionDecorator('hshn_angular.template_cache.configuration');
             $configuration
-                ->addMethodCall('setModuleName', array($moduleName))
-                ->addMethodCall('setTargets', array($templateConfig['targets']))
-                ->addMethodCall('setNewModule', array($templateConfig['new']));
+                ->addMethodCall('setName', array($module['name'] ?: $name))
+                ->addMethodCall('setCreate', array($module['create']))
+                ->addMethodCall('setTargets', array($module['targets']));
 
-            $container->setDefinition($id = sprintf('hshn_angular.template_cache.configuration.%s', $moduleName), $configuration);
-            $manager->addMethodCall('addModule', array(new Reference($id)));
+            $container->setDefinition($id = sprintf('hshn_angular.template_cache.configuration.%s', $name), $configuration);
+            $manager->addMethodCall('addModule', array($name, new Reference($id)));
         }
     }
 
