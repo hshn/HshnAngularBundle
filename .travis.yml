@@ -17,7 +17,8 @@ env:
   - SYMFONY_VERSION=2.6.*
 
 before_script:
+  - npm install
   - composer require symfony/framework-bundle:${SYMFONY_VERSION} --prefer-source
   - composer install --dev --prefer-source
 
-script: phpunit
+script: gulp test
