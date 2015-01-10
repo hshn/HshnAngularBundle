@@ -88,8 +88,6 @@ class HshnAngularExtension extends Extension
             $container->setDefinition(sprintf('hshn_angular.asset.template_cache.%s', $moduleName), $asset);
         }
 
-        $container->setAlias('hshn_angular.asset.template_cache.naming', $config['template_cache']['naming']);
-
         $container->setParameter('hshn_angular.assetic.closure', $config['closure']);
     }
 }

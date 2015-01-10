@@ -97,9 +97,6 @@ class HshnAngularExtensionTest extends \PHPUnit_Framework_TestCase
         $configs = $this->getConfiguration();
         $this->extension->load($configs, $this->container);
 
-        $this->assertHasService('hshn_angular.asset.template_cache.resource');
-        $this->assertHasService('hshn_angular.asset.template_cache.naming');
-
         $this->assertNotNull($definition = $this->container->getDefinition('hshn_angular.asset.template_cache.foo'));
         $this->assertMethodCall($definition->getMethodCalls(), 'setTargetPath', array('js/ng_template_cache/foo.js'));
         $this->assertEquals(array(array('alias' => 'ng_template_cache_foo')), $definition->getTag('assetic.asset'));
