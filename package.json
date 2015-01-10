@@ -1,7 +1,7 @@
 {
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-phpunit": "~0.3.3",
-    "grunt-contrib-watch": "~0.6.0"
+    "gulp": "^3.8.10",
+    "gulp-phpunit": "^0.7.0",
+    "gulp-watch": "^3.0.0"
   }
 }
