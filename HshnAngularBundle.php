@@ -12,14 +12,6 @@ class HshnAngularBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new SetClosureParameterPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function registerCommands(Application $application)
     {
         // disable auto registrations
