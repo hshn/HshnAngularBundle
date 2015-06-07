@@ -5,6 +5,7 @@ parameters:
   hshn_angular.template_cache.compiler.class:         Hshn\AngularBundle\TemplateCache\Compiler
   hshn_angular.template_cache.configuration.class:    Hshn\AngularBundle\TemplateCache\Configuration
   hshn_angular.command.dump_template_cache.class:     Hshn\AngularBundle\Command\DumpTemplateCacheCommand
+  hshn_angular.command.debug_template_cache.class:    Hshn\AngularBundle\Command\DebugTemplateCacheCommand
 
 services:
   hshn_angular.template_cache.template_finder:
@@ -34,5 +35,13 @@ services:
     arguments:
       - @hshn_angular.template_cache.dumper
       - ~
+    tags:
+      - { name: console.command }
+
+  hshn_angular.command.debug_template_cache:
+    class: %hshn_angular.command.debug_template_cache.class%
+    arguments:
+      - @hshn_angular.template_cache.manager
+      - @hshn_angular.template_cache.template_finder
     tags:
       - { name: console.command }
