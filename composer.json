@@ -15,7 +15,8 @@
         "symfony/console": "~2.3"
     },
     "require-dev": {
-        "symfony/assetic-bundle": "~2.1"
+        "symfony/assetic-bundle": "~2.1",
+        "symfony/browser-kit": "~2.3"
     },
     "config": {
         "bin-dir": "bin"

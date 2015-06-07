@@ -33,12 +33,4 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config.yml');
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootDir()
-    {
-        return sys_get_temp_dir() . '/HshnAngularBundle';
-    }
 }

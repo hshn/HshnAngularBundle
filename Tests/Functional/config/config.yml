@@ -1,3 +1,9 @@
 framework:
+  test: ~
   secret: secret
 hshn_angular:
+  template_cache:
+    modules:
+      foo:
+        name: "foo.templates"
+        targets: %kernel.root_dir%/Bundle/Resources
