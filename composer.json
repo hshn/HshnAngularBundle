@@ -17,6 +17,7 @@
     },
     "require-dev": {
         "symfony/assetic-bundle": "~2.1"
+        "phpunit/phpunit": "~4.8"
     },
     "config": {
         "bin-dir": "bin"
