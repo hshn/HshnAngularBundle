@@ -11,7 +11,7 @@ services:
   hshn_angular.template_cache.template_finder:
     class: %hshn_angular.template_cache.template_finder.class%
     arguments:
-      - @kernel
+      - "@kernel"
 
   hshn_angular.template_cache.manager:
     class: %hshn_angular.template_cache.manager.class%
@@ -26,14 +26,14 @@ services:
   hshn_angular.template_cache.dumper:
     class: %hshn_angular.template_cache.dumper.class%
     arguments:
-      - @hshn_angular.template_cache.manager
-      - @hshn_angular.template_cache.template_finder
-      - @hshn_angular.template_cache.compiler
+      - "@hshn_angular.template_cache.manager"
+      - "@hshn_angular.template_cache.template_finder"
+      - "@hshn_angular.template_cache.compiler"
 
   hshn_angular.command.dump_template_cache:
     class: %hshn_angular.command.dump_template_cache.class%
     arguments:
-      - @hshn_angular.template_cache.dumper
+      - "@hshn_angular.template_cache.dumper"
       - ~
     tags:
       - { name: console.command }
@@ -41,7 +41,7 @@ services:
   hshn_angular.command.debug_template_cache:
     class: %hshn_angular.command.debug_template_cache.class%
     arguments:
-      - @hshn_angular.template_cache.manager
-      - @hshn_angular.template_cache.template_finder
+      - "@hshn_angular.template_cache.manager"
+      - "@hshn_angular.template_cache.template_finder"
     tags:
       - { name: console.command }
