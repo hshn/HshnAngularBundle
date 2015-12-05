@@ -1,6 +1,7 @@
 {
     "name": "hshn/angular-bundle",
     "description": "Symfony HshnAngularBundle",
+    "keywords": ["Angular", "template", "templateCache", "Assetic"],
     "license": "MIT",
     "authors": [
         {
