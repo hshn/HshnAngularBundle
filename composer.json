@@ -17,6 +17,7 @@
     },
     "require-dev": {
         "symfony/assetic-bundle": "~2.7",
+        "symfony/twig-bundle": "~2.7",
         "phpunit/phpunit": "~4.8"
     },
     "config": {
