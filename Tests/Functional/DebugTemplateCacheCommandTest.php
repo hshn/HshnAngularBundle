@@ -13,10 +13,10 @@ class DebugTemplateCacheCommandTest extends WebTestCase
 {
     public function test()
     {
-        $client = static::createClient();
-        $command = $client->getContainer()->get('hshn_angular.command.debug_template_cache');
+        static::bootKernel();
+        $command = static::$kernel->getContainer()->get('hshn_angular.command.debug_template_cache');
 
-        $app = new Application($client->getKernel());
+        $app = new Application(static::$kernel);
         $app->add($command);
 
         $tester = new CommandTester($app->find('hshn:angular:template-cache:debug'));
