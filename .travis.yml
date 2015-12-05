@@ -1,5 +1,8 @@
 language: php
 
+node_js:
+  - 0.11
+
 php:
   - 5.3
   - 5.4
@@ -16,7 +19,8 @@ env:
   - SYMFONY_VERSION=2.8.*
 
 before_script:
+  - npm install
   - composer require symfony/framework-bundle:${SYMFONY_VERSION} symfony/http-kernel:${SYMFONY_VERSION} --prefer-source
   - composer install --dev --prefer-source
 
-script: phpunit
+script: npm test
