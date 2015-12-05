@@ -3,5 +3,8 @@
     "grunt": "~0.4.4",
     "grunt-phpunit": "~0.3.3",
     "grunt-contrib-watch": "~0.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
   }
 }

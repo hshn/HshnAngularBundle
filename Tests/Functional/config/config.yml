@@ -1,9 +1,17 @@
 framework:
   test: ~
   secret: secret
+  templating:
+    engines: ['twig']
+  router:
+    resource: %kernel.root_dir%/config/routing.yml
+
+assetic: ~
+
 hshn_angular:
   template_cache:
     modules:
       foo:
         name: "foo.templates"
         targets: %kernel.root_dir%/Bundle/Resources
+  assetic: ~

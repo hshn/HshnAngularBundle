@@ -4,7 +4,9 @@
 namespace Hshn\AngularBundle\Tests\Functional;
 
 use Hshn\AngularBundle\HshnAngularBundle;
+use Symfony\Bundle\AsseticBundle\AsseticBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -22,6 +24,8 @@ class AppKernel extends Kernel
     {
         return array(
             new FrameworkBundle(),
+            new TwigBundle(),
+            new AsseticBundle(),
             new HshnAngularBundle(),
         );
     }
