@@ -16,7 +16,7 @@
         "symfony/console": "~2.7"
     },
     "require-dev": {
-        "symfony/assetic-bundle": "~2.1"
+        "symfony/assetic-bundle": "~2.7",
         "phpunit/phpunit": "~4.8"
     },
     "config": {
