@@ -6,7 +6,7 @@ module.exports = function (grunt) {
                 dir: 'Tests'
             },
             options: {
-                bin: 'phpunit',
+                bin: './bin/phpunit',
                 colors: true,
                 followOutput: true
             }
